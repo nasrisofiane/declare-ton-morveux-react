@@ -1,14 +1,14 @@
 import { MDBBtn, MDBCol, MDBContainer, MDBInput, MDBRow } from 'mdbreact';
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../services/AppContext';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useHistory, useLocation, useRouteMatch } from 'react-router-dom';
 
 const SignIn = () => {
     const appContext = useContext(AppContext);
 
     const [inputDatas, setInputDatas] = useState({
-        username: null,
-        password: null
+        username: '',
+        password: ''
     });
 
     const match = useRouteMatch();
@@ -18,7 +18,7 @@ const SignIn = () => {
         headers.append('Content-Type', 'application/json');
 
         if (inputDatas.username != null && inputDatas.password != null) {
-            fetch('http://localhost:8080/authenticate', {
+            fetch(`${process.env.REACT_APP_API_URL}/authenticate`, {
                 headers: headers,
                 method: 'post',
                 credentials: 'include',
@@ -74,10 +74,9 @@ const SignIn = () => {
                             <MDBInput onChange={handlePasswordInputChange} value={inputDatas.password} type="password" label="Mot de passe" icon="lock" validate />
                         </div>
                         <div className="text-center">
-                            <MDBBtn onClick={authenticateUser}>Se connecter</MDBBtn>
+                            <MDBBtn style={{ color : 'white'}} onClick={authenticateUser}>Se connecter</MDBBtn>
                         </div>
                     </form>
-                    <button onClick={appContext.fetchIsAuthenticated}>Check auth</button>
                     
                     <p className="mt-3">Vous n'avez pas de compte ? <Link style={{display : 'inline'}} to={`${match.url}/signup`}>Enregistrez vous</Link></p>
                 </MDBCol>

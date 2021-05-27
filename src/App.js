@@ -1,31 +1,32 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import './App.css';
 import Header from './components/Header';
-import { AppContext } from './services/AppContext';
 import Welcome from './views/Welcome';
 import Login from './views/Login';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
+import ChildDeclaration from './views/ChildDeclaration';
+import PrivateRoute from './services/PrivateRoute';
+import AnonymousRoute from './services/AnonymousRoute';
 
 function App() {
-  const { schools, user} = useContext(AppContext);
 
   return (
     <div className="App h-100 d-flex flex-column">
-      <Router>
-        <header>
-          <Header />
-        </header>
-        <Switch>
-          <Route exact path="/" component={Welcome} />
+      <header>
+        <Header />
+      </header>
 
-          <Route path="/login" component={Login} />
-        </Switch>
-      </Router>
+      <Switch>
+        <Route exact path="/" component={Welcome} />
 
+        <AnonymousRoute path="/login">
+          <Login/>
+        </AnonymousRoute>
+
+        <PrivateRoute path="/childDeclaration">
+          <ChildDeclaration />
+        </PrivateRoute>
+      </Switch>
     </div>
   );
 }

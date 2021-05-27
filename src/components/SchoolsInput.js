@@ -4,38 +4,39 @@ import { AppContext } from '../services/AppContext';
 
 import './css/SchoolsInput.css';
 
-const getWindowDimensions = () =>{
+const getWindowDimensions = () => {
     return {
-        width : window.innerWidth,
-        height : window.innerHeight
+        width: window.innerWidth,
+        height: window.innerHeight
     }
 }
 
 const styles = {
-    container : {
-        position : 'relative',
-        width : '10%',
-        minWidth : '300px',
-        maxWidth : '700px'
-    },
-    
-    mdbContainer : {
-        fontSize : '13px',
-        padding : '0px',
-        margin : '0px'
+    container: {
+        position: 'relative',
+        width: '10%',
+        minWidth: '300px',
+        maxWidth: '700px',
+        zIndex : 1000
     },
 
-    mdbListGroup : {
-        width : '100%',
-        position : 'absolute',
-        height : 'auto',
-        maxHeight : getWindowDimensions().height / 2.9,
-        overflowX : 'hidden',
-        overflowY : 'auto'
+    mdbContainer: {
+        fontSize: '13px',
+        padding: '0px',
+        margin: '0px'
+    },
+
+    mdbListGroup: {
+        width: '100%',
+        position: 'absolute',
+        height: 'auto',
+        maxHeight: getWindowDimensions().height / 2.9,
+        overflowX: 'hidden',
+        overflowY: 'auto'
     }
 }
 
-const SchoolsInput = () => {
+const SchoolsInput = ({ isLocal, getter }) => {
     const { schools, setSchools } = useContext(AppContext);
     const [selectedOption, setSelectedOption] = useState('');
     const [displayList, setDisplayList] = useState('none');
@@ -67,30 +68,35 @@ const SchoolsInput = () => {
             const school = schools.all.get(value);
 
             if (school != null) {
-                setSchools(prev => {
-                    return {
-                        ...prev,
-                        selectedSchool: school
-                    }
-                })
+                if(isLocal === true){
+                    getter(school);
+                } else {
+                    setSchools(prev => {
+                        return {
+                            ...prev,
+                            selectedSchool: school
+                        }
+                    })
+                }
+                
             }
         }
     }
 
-    const handleDisplayList = (show) =>{
+    const handleDisplayList = (show) => {
         const displayElement = 'block';
         const hiddingElement = 'none';
 
-        if(show === true && displayList != displayElement){
+        if (show === true && displayList != displayElement) {
             setDisplayList(displayElement);
 
-        } else if(show === false && displayList != hiddingElement && isCursorOnList === false) {
+        } else if (show === false && displayList != hiddingElement && isCursorOnList === false) {
             setDisplayList(hiddingElement);
         }
 
     }
 
-    const getSchools = () =>{
+    const getSchools = () => {
         const filteredSchools = Array.from(schools.all).filter(([key, value]) => customFilter(value.name));
         setfilteredSchools(filteredSchools);
     }
@@ -100,15 +106,15 @@ const SchoolsInput = () => {
         getSchools();
     }, [selectedOption]);
 
-    useEffect(() =>{
+    useEffect(() => {
         getSchools();
     }, [schools.all]);
 
     return (
         <div style={styles.container}>
-            <MDBInput id="school-input" onBlur={() => handleDisplayList(false)} onFocus={() => handleDisplayList(true)} value={selectedOption} id="school-input" label="Ecoles" icon="school" type="text" list="schools" onChange={handleSchoolsInput} />
+            <MDBInput autoComplete="off" id="school-input" onBlur={() => handleDisplayList(false)} onFocus={() => handleDisplayList(true)} value={selectedOption} id="school-input" label="Ecoles" icon="school" type="text" list="schools" onChange={handleSchoolsInput} />
 
-            <div id="schools" style={{ display: displayList}}>
+            <div id="schools" style={{ display: displayList }}>
                 <MDBContainer style={styles.mdbContainer}>
 
                     <MDBListGroup onMouseEnter={() => setIsCursorOnList(true)} onMouseLeave={() => setIsCursorOnList(false)} style={styles.mdbListGroup}>

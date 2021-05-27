@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import Charts from '../components/Charts';
+import Leaflet from '../components/Leaflet';
 import SchoolsInput from '../components/SchoolsInput';
 import SchoolStats from '../components/SchoolStats';
 
 const Welcome = () => {
+
+    useEffect(() =>{
+        console.log(process.env);
+    });
 
     return (
         <div>
@@ -10,6 +16,8 @@ const Welcome = () => {
                 <SchoolsInput />
             </div>
             <SchoolStats />
+            <Leaflet/>
+            <Charts/>
         </div>
     );
 }

@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
 
-
 const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
@@ -10,28 +9,31 @@ const AppContextProvider = ({ children }) => {
     });
 
     const [user, setUser] = useState({
-        isAuthenticated : false,
-        token : null
+        id: null,
+        username: null,
+        isAuthenticated: false,
+        token: null
     });
 
-    const fetchIsAuthenticated = () =>{
-        fetch("http://localhost:8080/isAuthenticated", {
-            credentials : 'include'
+    const [myChildren, setMyChildren] = useState([]);
+
+    const fetchIsAuthenticated = () => {
+
+        const res = fetch(`${process.env.REACT_APP_API_URL}/isAuthenticated`, {
+            credentials: 'include'
         })
-        .then(res => res.json())
-        .then(res => {
-            console.log('is authenticated ? ' + res);
-            setSchools(prev => {
+            .then(res => res.json())
+            .then(res => setUser(prev => {
                 return {
                     ...prev,
-                    isAuthenticated : res
+                    isAuthenticated: res
                 }
-            });
-        });
+            })
+            );
     }
 
     const fetchSchools = () => {
-        fetch("http://localhost:8080/api/schools")
+        fetch(`${process.env.REACT_APP_API_URL}/api/schools`)
             .then(res => res.json())
             .then(schools => {
                 let schoolsToMap = new Map(schools.map(school => [school.name, school]));
@@ -44,10 +46,44 @@ const AppContextProvider = ({ children }) => {
             });
     }
 
+    const fetchMyChildren = () => {
+        if (Number.isInteger(user.id)) {
+            fetch(`${process.env.REACT_APP_API_URL}/api/children/parent/${user.id}`, {
+                credentials: 'include'
+            })
+                .then(res => res.json())
+                .then(children => {
+                    setMyChildren(children);
+                });
+        }
+    }
+
+    const fetchMyAccount = () => {
+        fetch(`${process.env.REACT_APP_API_URL}/api/parents/me`, {
+            credentials: 'include'
+        })
+            .then(res => res.json())
+            .then(me => {
+                setUser((prev) => {
+                    return {
+                        ...prev,
+                        id: me.id,
+                        username: me.username
+                    }
+                });
+            });
+    }
+
     useEffect(() => {
         fetchSchools();
         fetchIsAuthenticated();
     }, []);
+
+    useEffect(() => {
+        if (user.isAuthenticated) {
+            fetchMyAccount();
+        }
+    }, [user.isAuthenticated]);
 
     return (
         <AppContext.Provider value={
@@ -56,7 +92,9 @@ const AppContextProvider = ({ children }) => {
                 setSchools,
                 user,
                 setUser,
-                fetchIsAuthenticated
+                fetchIsAuthenticated,
+                fetchMyChildren,
+                myChildren
             }
         }>
             { children}

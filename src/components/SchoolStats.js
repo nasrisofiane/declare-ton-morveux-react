@@ -1,3 +1,4 @@
+import { MDBAlert, MDBContainer } from 'mdbreact';
 import React, { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../services/AppContext';
 
@@ -27,10 +28,12 @@ const SchoolStats = () => {
 
         if (hasSelectedSchool()) {
             return (
-                <div>
-                    <p>{nbOfSickAndContagious} malades contagieux sur cette école.</p>
-                    <p>{nbOfSick} malades non contagieux.</p>
-                </div>
+                <MDBContainer>
+                    <MDBAlert color="warning">
+                        <h4 className="alert-heading">Informations</h4>
+                        <p>Il y a eu {nbOfSick} malades dont {nbOfSickAndContagious} contagieux toutes périodes confondues</p>
+                    </MDBAlert>
+                </MDBContainer>
             )
         } else {
 

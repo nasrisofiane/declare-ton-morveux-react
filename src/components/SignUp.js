@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 
 const SignUp = () => {
     const [inputDatas, setInputDatas] = useState({
-        username: null,
-        password: null,
-        email: null
+        username: '',
+        password: '',
+        email: ''
     });
 
     const [isAccountRegistered, setIsAccountRegistered] = useState(null);
@@ -16,7 +16,7 @@ const SignUp = () => {
         headers.append('Content-Type', 'application/json');
 
         if (inputDatas.username != null && inputDatas.password != null) {
-            fetch('https://declare-ton-morveux.herokuapp.com/register', {
+            fetch(`${process.env.REACT_APP_API_URL}/register`, {
                 headers: headers,
                 method: 'post',
                 body: JSON.stringify(inputDatas)
@@ -116,7 +116,7 @@ const SignUp = () => {
                             <MDBInput value={inputDatas.password} type="password" label="Mot de passe" icon="lock" validate onChange={handlePasswordInputChange} />
                         </div>
                         <div className="text-center">
-                            <MDBBtn onClick={registerUser}>S'enregistrer</MDBBtn>
+                            <MDBBtn style={{ color : 'white'}} onClick={registerUser}>S'enregistrer</MDBBtn>
                         </div>
 
 
