@@ -1,10 +1,10 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { MDBContainer } from 'mdbreact';
 import React, { useContext, useEffect } from 'react';
-import { MDBBtn, MDBContainer, MDBInput } from 'mdbreact';
 import { AppContext } from '../services/AppContext';
 import ChildUpdateForm from './ChildUpdateForm';
+
 
 const ChildrenList = () => {
     const { fetchMyChildren, user, myChildren } = useContext(AppContext);
@@ -15,21 +15,21 @@ const ChildrenList = () => {
 
     const createAccordion = () => {
         return (
-            <div class="accordion" id="accordionChildren">
+            <div className="accordion" id="accordionChildren">
                 {myChildren.map((child, i) => {
                     const currentCollapseName = `collapse-${i}`;
                     const currentHeadingName = `heading-${i}`;
 
                     return (
-                        <div key={i} class="accordion-item">
-                            <h2 class="accordion-header" id={currentHeadingName}>
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={'#' + currentCollapseName} aria-expanded="false" aria-controls={currentCollapseName}>
+                        <div key={i} className="accordion-item">
+                            <h2 className="accordion-header" id={currentHeadingName}>
+                                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={'#' + currentCollapseName} aria-expanded="false" aria-controls={currentCollapseName}>
                                     {child.firstName + ' ' + child.lastName}
                                 </button>
                             </h2>
 
-                            <div id={currentCollapseName} class="accordion-collapse collapse" aria-labelledby={currentHeadingName} data-bs-parent="#accordionChildren">
-                                <div class="accordion-body">
+                            <div id={currentCollapseName} className="accordion-collapse collapse" aria-labelledby={currentHeadingName} data-bs-parent="#accordionChildren">
+                                <div className="accordion-body">
                                     <p>{child.school.name}</p>
                                     
                                     <ChildUpdateForm id={child.id} isSick={child.sick} isContagious={child.contagious} />

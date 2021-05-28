@@ -48,7 +48,7 @@ const Charts = () => {
             for (let i = 0; i < declarations.length; i++) {
                 const currentDeclaration = declarations[i];
 
-                if (currentDeclaration.contagious == contagious) {
+                if (currentDeclaration.contagious === contagious) {
                     const declarationMonth = currentDeclaration.date.getMonth();
 
                     dataSet[declarationMonth] = dataSet[declarationMonth] + 1;
@@ -66,7 +66,7 @@ const Charts = () => {
     const viewLoader = () => {
 
         if (hasSelectedSchool() && state != null) {
-            if (declarations == null) {
+            if (declarations === null) {
                 return (
                     <div className="spinner-border text-primary" role="status">
                         <span className="sr-only">Loading...</span>

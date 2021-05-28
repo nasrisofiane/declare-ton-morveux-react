@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { Route, Switch } from "react-router-dom";
 import './App.css';
 import Header from './components/Header';
-import Welcome from './views/Welcome';
-import Login from './views/Login';
-import { Switch, Route } from "react-router-dom";
-import ChildDeclaration from './views/ChildDeclaration';
-import PrivateRoute from './services/PrivateRoute';
 import AnonymousRoute from './services/AnonymousRoute';
+import PrivateRoute from './services/PrivateRoute';
+import ChildDeclaration from './views/ChildDeclaration';
+import Login from './views/Login';
+import Welcome from './views/Welcome';
 
 function App() {
 

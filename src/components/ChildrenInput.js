@@ -84,7 +84,7 @@ const ChildrenInput = () => {
                             </div>
                         </div>
                         <div id="add-child-btn" className="text-center d-flex justify-content-center align-items-center">
-                            <MDBBtn onClick={addChildren} className="ml-4" MDBBtn><MDBIcon icon="plus" /></MDBBtn>
+                            <MDBBtn onClick={addChildren} className="ml-4"><MDBIcon icon="plus" /></MDBBtn>
                         </div>
                     </form>
                 </MDBCol>

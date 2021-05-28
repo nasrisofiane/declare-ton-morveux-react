@@ -72,15 +72,15 @@ const ChildUpdateForm = ({ id, isSick, isContagious }) => {
 
     return (
         <div className="d-flex flex-row justify-content-between">
-            <div class="custom-control custom-checkbox">
+            <div className="custom-control custom-checkbox">
                 <div>
-                    <input onChange={handleSickChange} id={`sick-checkbox-` + id} checked={sick} class="custom-control-input" type="checkbox" />
-                    <label class="custom-control-label" htmlFor={`sick-checkbox-` + id}>Malade</label>
+                    <input onChange={handleSickChange} id={`sick-checkbox-` + id} checked={sick} className="custom-control-input" type="checkbox" />
+                    <label className="custom-control-label" htmlFor={`sick-checkbox-` + id}>Malade</label>
                 </div>
 
                 <div>
-                    <input onChange={handleContagiousChange} id={`contagious-checkbox-` + id} checked={contagious} class="custom-control-input" type="checkbox" />
-                    <label class="custom-control-label" htmlFor={`contagious-checkbox-` + id}>Contagieux</label>
+                    <input onChange={handleContagiousChange} id={`contagious-checkbox-` + id} checked={contagious} className="custom-control-input" type="checkbox" />
+                    <label className="custom-control-label" htmlFor={`contagious-checkbox-` + id}>Contagieux</label>
                 </div>
             </div>
 

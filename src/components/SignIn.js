@@ -1,7 +1,7 @@
 import { MDBBtn, MDBCol, MDBContainer, MDBInput, MDBRow } from 'mdbreact';
 import React, { useContext, useState } from 'react';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { AppContext } from '../services/AppContext';
-import { Link, useHistory, useLocation, useRouteMatch } from 'react-router-dom';
 
 const SignIn = () => {
     const appContext = useContext(AppContext);

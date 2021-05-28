@@ -1,8 +1,8 @@
-import { MDBInput, MDBContainer, MDBListGroup, MDBListGroupItem } from 'mdbreact';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import { MDBContainer, MDBInput, MDBListGroup, MDBListGroupItem } from 'mdbreact';
+import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../services/AppContext';
-
 import './css/SchoolsInput.css';
+
 
 const getWindowDimensions = () => {
     return {

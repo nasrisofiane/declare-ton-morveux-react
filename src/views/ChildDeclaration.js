@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import ChildrenInput from '../components/ChildrenInput';
 import ChildrenList from '../components/ChildrenList';
-import { AppContext } from '../services/AppContext';
 
 const ChildDeclaration = () => {
-    const { fetchMyAccount } = useContext(AppContext);
 
     return (
         <div>

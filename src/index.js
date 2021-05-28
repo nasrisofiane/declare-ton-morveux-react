@@ -5,7 +5,6 @@ import 'mdbreact/dist/css/mdb.css';
 import dotenv from 'dotenv';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AppContextProvider } from './services/AppContext';
