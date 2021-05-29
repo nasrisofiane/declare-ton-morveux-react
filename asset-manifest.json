@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/declare-ton-morveux-react/static/css/main.bf016e26.chunk.css",
+    "main.js": "/declare-ton-morveux-react/static/js/main.07c4bb89.chunk.js",
+    "main.js.map": "/declare-ton-morveux-react/static/js/main.07c4bb89.chunk.js.map",
+    "runtime-main.js": "/declare-ton-morveux-react/static/js/runtime-main.1fe56372.js",
+    "runtime-main.js.map": "/declare-ton-morveux-react/static/js/runtime-main.1fe56372.js.map",
+    "static/css/2.6cbed66f.chunk.css": "/declare-ton-morveux-react/static/css/2.6cbed66f.chunk.css",
+    "static/js/2.6f4f765b.chunk.js": "/declare-ton-morveux-react/static/js/2.6f4f765b.chunk.js",
+    "static/js/2.6f4f765b.chunk.js.map": "/declare-ton-morveux-react/static/js/2.6f4f765b.chunk.js.map",
+    "static/js/3.a002771e.chunk.js": "/declare-ton-morveux-react/static/js/3.a002771e.chunk.js",
+    "static/js/3.a002771e.chunk.js.map": "/declare-ton-morveux-react/static/js/3.a002771e.chunk.js.map",
+    "index.html": "/declare-ton-morveux-react/index.html",
+    "static/css/2.6cbed66f.chunk.css.map": "/declare-ton-morveux-react/static/css/2.6cbed66f.chunk.css.map",
+    "static/css/main.bf016e26.chunk.css.map": "/declare-ton-morveux-react/static/css/main.bf016e26.chunk.css.map",
+    "static/js/2.6f4f765b.chunk.js.LICENSE.txt": "/declare-ton-morveux-react/static/js/2.6f4f765b.chunk.js.LICENSE.txt",
+    "static/media/mdb.css": "/declare-ton-morveux-react/static/media/arrow_right.0897f985.svg",
+    "static/media/all.min.css": "/declare-ton-morveux-react/static/media/fa-solid-900.efbd5d20.eot"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1fe56372.js",
+    "static/css/2.6cbed66f.chunk.css",
+    "static/js/2.6f4f765b.chunk.js",
+    "static/css/main.bf016e26.chunk.css",
+    "static/js/main.07c4bb89.chunk.js"
+  ]
+}
