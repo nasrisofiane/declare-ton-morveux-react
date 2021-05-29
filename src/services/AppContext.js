@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import DynosStates from './DynosStates';
 
 const AppContext = createContext();
 
@@ -15,7 +16,25 @@ const AppContextProvider = ({ children }) => {
         token: null
     });
 
+    const [dynosState, setDynosState] = useState(DynosStates.SLEEPING);
+    const [isDatasLoaded, setIsDatasLoaded] = useState(false);
+
     const [myChildren, setMyChildren] = useState([]);
+
+    const getServerCurrentStatus = () =>{
+        const headers = new Headers();
+        headers.append('Accept', process.env.REACT_APP_HEROKU_ACCEPT_HEADER);
+        headers.append('Authorization', `Bearer ${process.env.REACT_APP_HEROKU_TOKEN}`)
+
+        const res = fetch(process.env.REACT_APP_SERVER_DYNOS_URL, { 
+            headers : headers,
+            method : 'GET'
+        })
+            .then(res => res.json())
+            .then(res => setDynosState(res[0].state))
+            .catch( err => console.log('Cannot retrieve Server status'));
+
+    }
 
     const fetchIsAuthenticated = () => {
 
@@ -43,6 +62,8 @@ const AppContextProvider = ({ children }) => {
                         all: schoolsToMap
                     }
                 });
+
+                setIsDatasLoaded(true);
             });
     }
 
@@ -77,6 +98,7 @@ const AppContextProvider = ({ children }) => {
     useEffect(() => {
         fetchSchools();
         fetchIsAuthenticated();
+        getServerCurrentStatus();
     }, []);
 
     useEffect(() => {
@@ -94,7 +116,10 @@ const AppContextProvider = ({ children }) => {
                 setUser,
                 fetchIsAuthenticated,
                 fetchMyChildren,
-                myChildren
+                myChildren,
+                dynosState,
+                setDynosState,
+                isDatasLoaded
             }
         }>
             { children}

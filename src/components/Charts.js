@@ -1,7 +1,7 @@
 import { MDBContainer } from 'mdbreact';
 import React, { useState, useContext, useEffect } from 'react';
 import { Line } from "react-chartjs-2";
-import {ChartOptions, ChartConfig} from '../services/Chart';
+import { ChartOptions, ChartConfig } from '../services/Chart';
 import { AppContext } from '../services/AppContext';
 
 const Charts = () => {
@@ -56,8 +56,6 @@ const Charts = () => {
                 }
             }
 
-            console.log(dataSet);
-
         }
 
         return dataSet;
@@ -68,9 +66,11 @@ const Charts = () => {
         if (hasSelectedSchool() && state != null) {
             if (declarations === null) {
                 return (
-                    <div className="spinner-border text-primary" role="status">
-                        <span className="sr-only">Loading...</span>
-                    </div>
+                    <MDBContainer className="mt-4">
+                        <div role="status" className="spinner-border text-primary text-center">
+                            <span className="sr-only">Loading...</span>
+                        </div>
+                    </MDBContainer>
                 );
             } else {
                 return (
@@ -103,13 +103,7 @@ const Charts = () => {
 
         setState(newState);
 
-        console.log('DECLARATIONS HAS CHANGED');
     }, [declarations]);
-
-    useEffect(() =>{
-
-        return () => console.log('UNMOUNTED CHART');
-    }, []);
 
     return viewLoader();
 }

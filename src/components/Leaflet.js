@@ -12,7 +12,6 @@ const Leaflet = () => {
         if (schools.selectedSchool.id != null && ref.current != null) {
             const lat = schools.selectedSchool.latitude;
             const lng = schools.selectedSchool.longitude;
-            console.log('selected school has changed');
 
             ref.current.setView([lng, lat], 20);
         }

@@ -9,14 +9,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AppContextProvider } from './services/AppContext';
 import { BrowserRouter as Router } from "react-router-dom";
+import Loading from './components/Loading';
 
 dotenv.config();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <AppContextProvider>
         <App />
+        <Loading/>
       </AppContextProvider>
     </Router>
   </React.StrictMode>,

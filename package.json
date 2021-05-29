@@ -1,6 +1,6 @@
 {
   "name": "declare-ton-morveux",
-  "homepage": "https://nasrisofiane.github.io/declare-ton-morveux-react/",
+  "homepage": "https://nasrisofiane.github.io/declare-ton-morveux-react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -87,7 +87,7 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -b development -d build"
   },
   "eslintConfig": {
     "extends": [

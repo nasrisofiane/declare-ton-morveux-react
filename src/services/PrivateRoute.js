@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { Route, Redirect, useLocation } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { Redirect, Route, useLocation } from 'react-router-dom';
 import { AppContext } from './AppContext';
 
 
@@ -12,7 +12,8 @@ const PrivateRoute = ({ children, ...rest }) => {
             {...rest}
 
             render={({ location }) => {
-                return user.isAuthenticated ? children : <Redirect to={{ pathname: "/login", state: { from: location } }} />
+                return user.isAuthenticated ? children : <Redirect to={{ pathname: '/login', state: { from: location } }} />
+                
             }
             }
         />
