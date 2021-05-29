@@ -15,7 +15,7 @@ dotenv.config();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router basename="/declare-ton-morveux-react">
+    <Router basename={process.env.PUBLIC_URL}>
       <AppContextProvider>
         <App />
         <Loading/>
