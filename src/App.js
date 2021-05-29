@@ -11,7 +11,7 @@ import Welcome from './views/Welcome';
 function App() {
 
   useEffect(() => {
-    console.log('App v4');
+    console.log('App v3');
   }, []);
 
   return (
