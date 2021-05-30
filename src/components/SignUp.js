@@ -9,6 +9,8 @@ const SignUp = () => {
         email: ''
     });
 
+    const [errors, setErrors] = useState({});
+
     const [isAccountRegistered, setIsAccountRegistered] = useState(null);
 
     const registerUser = () => {
@@ -27,7 +29,13 @@ const SignUp = () => {
                     } else {
                         setIsAccountRegistered(false);
                     }
+
+                    if (response.status == 400) {
+                        console.log('CANNOT REGISTER 400 !');
+                        return response.json();
+                    }
                 })
+                .then(response => setErrors(response));
         }
 
     }
@@ -78,27 +86,25 @@ const SignUp = () => {
         })
     }
 
-    const generateResponseMessage = () => {
+    const generateFieldsMessages = () => {
+        const messages = Object.values(errors);
 
-        if (isAccountRegistered == null) {
-            return;
-        } else if (isAccountRegistered) {
+        if (messages.length > 0) {
             return (
-                <MDBAlert color="success" >
-                    Le compte a bien été enregistrer
-                </MDBAlert>
+                <div>
+                    { messages.map((message, i) => <MDBAlert key={i} color="danger">{message}</MDBAlert>)}
+                </div>
             )
-        } else if (!isAccountRegistered) {
+
+        } else {
             return (
-                <MDBAlert color="danger" >
-                    Impossible d'enregistrer le compte
-                </MDBAlert>
-            )
+                <div></div>
+            );
         }
     }
 
-    useEffect(() =>{
-        if(isAccountRegistered){
+    useEffect(() => {
+        if (isAccountRegistered) {
             cleanUpInputs();
         }
     }, [isAccountRegistered]);
@@ -108,15 +114,17 @@ const SignUp = () => {
             <MDBRow className="d-flex justify-content-center align-items-center mt-4">
                 <MDBCol md="6">
                     <form>
-                        {generateResponseMessage()}
                         <p className="h5 text-center mb-4">Sign up</p>
                         <div className="grey-text">
                             <MDBInput value={inputDatas.username} type="text" label="Nom d'utilisateur" icon="user" onChange={handleUsernameInputChange} />
                             <MDBInput value={inputDatas.email} type="email" label="Email" icon="envelope" onChange={handleEmailInputChange} />
                             <MDBInput value={inputDatas.password} type="password" label="Mot de passe" icon="lock" validate onChange={handlePasswordInputChange} />
                         </div>
+                        
+                        {generateFieldsMessages()}
+
                         <div className="text-center">
-                            <MDBBtn style={{ color : 'white'}} onClick={registerUser}>S'enregistrer</MDBBtn>
+                            <MDBBtn style={{ color: 'white' }} onClick={registerUser}>S'enregistrer</MDBBtn>
                         </div>
 
 

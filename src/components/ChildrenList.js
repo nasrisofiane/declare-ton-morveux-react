@@ -1,6 +1,6 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { MDBContainer } from 'mdbreact';
+import { MDBAlert, MDBContainer } from 'mdbreact';
 import React, { useContext, useEffect } from 'react';
 import { AppContext } from '../services/AppContext';
 import ChildUpdateForm from './ChildUpdateForm';
@@ -16,6 +16,9 @@ const ChildrenList = () => {
     const createAccordion = () => {
         return (
             <div className="accordion" id="accordionChildren">
+                <MDBAlert color="warning" >
+                    Les enfants déclaré malades sont automatiquement déclaré non malade après 5 jours
+                </MDBAlert>
                 {myChildren.map((child, i) => {
                     const currentCollapseName = `collapse-${i}`;
                     const currentHeadingName = `heading-${i}`;

@@ -7,6 +7,7 @@ const Header = () => {
 
     const appContext = useContext(AppContext);
     const [userIsAuthenticated, setUserIsAuthenticated] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
     const logout = () => {
 
@@ -21,11 +22,15 @@ const Header = () => {
             .catch(error => console.log('error', error));
     }
 
+    const toggleCollapse = () => {
+        setIsOpen(!isOpen);
+      }
+
     const renderLogoutButton = () => {
         if (userIsAuthenticated) {
             return (
-                <MDBNavItem>
-                    <MDBBtn onClick={logout} className="m-0"><MDBIcon style={{ color: 'white' }} icon="sign-out-alt" /></MDBBtn>
+                <MDBNavItem className="d-flex align-items-center ">
+                    <a onClick={logout} className="text-light nav-link">Se deconnecter</a>
                 </MDBNavItem>
             );
         }
@@ -40,11 +45,10 @@ const Header = () => {
             <MDBNavbarBrand>
                 <Link className="navbar-brand" to="/">Déclare Ton Morveux</Link>
             </MDBNavbarBrand>
-            <MDBNavbarToggler />
-            <MDBCollapse id="navbarCollapse3" navbar>
-                <MDBNavbarNav left>
 
-                </MDBNavbarNav>
+            <MDBNavbarToggler onClick={toggleCollapse}/>
+            <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
+                
                 <MDBNavbarNav right>
                     <MDBNavItem className="mr-3">
                         <Link className="nav-link" to="/childDeclaration">Déclarez un enfant</Link>

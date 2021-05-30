@@ -50,7 +50,7 @@ const Charts = () => {
 
                 if (currentDeclaration.contagious === contagious) {
                     const declarationMonth = currentDeclaration.date.getMonth();
-
+                    
                     dataSet[declarationMonth] = dataSet[declarationMonth] + 1;
 
                 }

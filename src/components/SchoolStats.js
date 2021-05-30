@@ -31,7 +31,7 @@ const SchoolStats = () => {
                 <MDBContainer>
                     <MDBAlert color="warning">
                         <h4 className="alert-heading">Informations</h4>
-                        <p>Il y a eu {nbOfSick} malades dont {nbOfSickAndContagious} contagieux toutes périodes confondues</p>
+                        <p>Il y a actuellement {nbOfSick} malades dont {nbOfSickAndContagious} contagieux sur cette école</p>
                     </MDBAlert>
                 </MDBContainer>
             )
