@@ -1,8 +1,29 @@
 
 const ChartConfig = () => {
+
+    const generateMonthFromNow = () => {
+        let months = [];
+
+        for (let i = 11; i >= 0; i--) {
+            let now = new Date();
+            now.setMonth(now.getMonth() - i);
+
+            let month = now.toLocaleString('fr', { month: 'long' });
+            month = month.substring(0,1).toLocaleUpperCase() + month.substring(1, month.length);
+
+            months.push(month);
+        }
+
+        
+
+        return months;
+    }
+
+    generateMonthFromNow();
+
     return {
         dataLine: {
-            labels: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"],
+            labels: generateMonthFromNow(),
 
             datasets: [
                 {

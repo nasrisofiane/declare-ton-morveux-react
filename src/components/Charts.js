@@ -26,14 +26,24 @@ const Charts = () => {
     const [state, setState] = useState(null);
 
     const getDeclarationsCurrentYear = (declarations) => {
-        const currentYear = new Date();
+        const date = new Date();
 
         if (Array.isArray(declarations)) {
             const currentYearDeclarations = declarations
                 .map(declaration => {
                     return { ...declaration, date: new Date(declaration.date) }
                 })
-                .filter(declaration => currentYear.getFullYear() === declaration.date.getFullYear());
+                .filter(declaration => {
+                    if(date.getFullYear() === declaration.date.getFullYear()){
+                        if(declaration.date.getMonth() <= date.getMonth()){
+                            return true;
+                        }
+                    } else if(declaration.date.getFullYear() >= date.getFullYear()-1 ) {
+                        if(declaration.date.getMonth() > date.getMonth()){
+                            return true;
+                        }
+                    }
+                });
 
             return currentYearDeclarations;
         }
@@ -46,12 +56,15 @@ const Charts = () => {
 
         if (Array.isArray(declarations)) {
             for (let i = 0; i < declarations.length; i++) {
+
                 const currentDeclaration = declarations[i];
+                const monthName = currentDeclaration.date.toLocaleString('fr', { month: 'long' });
+                const monthNameCapitalized = monthName.charAt(0).toUpperCase() + monthName.slice(1);
+                const indexOfDatas = state.dataLine.labels.indexOf(monthNameCapitalized);
 
                 if (currentDeclaration.contagious === contagious) {
-                    const declarationMonth = currentDeclaration.date.getMonth();
-                    
-                    dataSet[declarationMonth] = dataSet[declarationMonth] + 1;
+
+                    dataSet[indexOfDatas] = dataSet[indexOfDatas] + 1;
 
                 }
             }
