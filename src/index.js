@@ -15,7 +15,7 @@ dotenv.config();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router basename={process.env.PUBLIC_URL}>
+    <Router>
       <AppContextProvider>
         <App />
         <Loading/>
