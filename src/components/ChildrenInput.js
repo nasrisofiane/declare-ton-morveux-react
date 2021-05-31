@@ -67,8 +67,8 @@ const ChildrenInput = () => {
                 <p className="h5 text-center mb-4">Ajoutez un enfant</p>
 
                 <MDBCol md="12">
-                    <form className="d-flex flex-row justify-content-center">
-                        <div className="grey-text d-flex flex-row justify-content-center align-items-center">
+                    <form className="d-flex flex-md-row flex-column justify-content-center">
+                        <div className="grey-text d-flex flex-md-row flex-column justify-content-center align-items-center">
                             <div className="d-flex flex-row justify-content-center">
                                 <div className="mr-1">
                                     <MDBInput value={lastName} type="text" onChange={handleLastNameInput} label="Nom" icon="child" />

@@ -6,6 +6,7 @@ const ChildUpdateForm = ({ id, isSick, isContagious }) => {
     const [sick, setSick] = useState(false);
     const [contagious, setContagious] = useState(false);
     const [isUpdated, setIsUpdated] = useState(null);
+    const [isFetching, setIsFetching] = useState(false);
 
     useEffect(() => {
         setSick(isSick);
@@ -13,6 +14,8 @@ const ChildUpdateForm = ({ id, isSick, isContagious }) => {
     }, []);
 
     const handleSubmitNewChildState = () => {
+        setIsFetching(true);
+
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
@@ -35,6 +38,7 @@ const ChildUpdateForm = ({ id, isSick, isContagious }) => {
                     setIsUpdated(false);
                 }
             })
+            .finally(() => setIsFetching(false));
     }
 
     const handleSickChange = (e) => {
@@ -47,31 +51,42 @@ const ChildUpdateForm = ({ id, isSick, isContagious }) => {
         setContagious(value);
     }
 
-    const generateIcons = () => {
-        let dangerOrSuccess;
-        let icon;
-
-        if (isUpdated) {
-            dangerOrSuccess = 'success';
-            icon = 'check-circle';
-
-        } else {
-            dangerOrSuccess = 'danger';
-            icon = 'times-circle';
+    const resetButtonState = () => {
+        if (!isFetching) {
+            setIsUpdated(null);
         }
-
-        if (isUpdated != null) {
-            return (
-                <MDBBadge color={dangerOrSuccess}>
-                    <MDBIcon fas icon={icon} />
-                </MDBBadge>
-            );
-        }
-
     }
 
+    const generateDynamicButton = () => {
+        let baseElement = null;
+
+        if (isFetching) {
+            baseElement = (<div role="status" style={{ width: '16px', height: '16px' }} className="spinner-border text-light text-center">
+                <span className="sr-only">Loading...</span>
+            </div>);
+        } else if (isUpdated || isUpdated === false) {
+            if (isUpdated) {
+                baseElement = <MDBIcon className="text-light" far icon="check-circle" />;
+            } else {
+                baseElement = <MDBIcon className="text-danger" far icon="times-circle" />
+            }
+
+        } else {
+            baseElement = 'Mettre à jour';
+        }
+
+        return <MDBBtn style={{ height: '38px', fontSize : '2vh' }} onPointerEnter={resetButtonState} onClick={handleSubmitNewChildState} className="text-light">{baseElement}</MDBBtn>
+    }
+
+    useEffect(() => {
+        if(isUpdated){
+           setTimeout(() => setIsUpdated(null), 4000);
+        }
+    }, [isUpdated]);
+
+
     return (
-        <div className="d-flex flex-row justify-content-between">
+        <div className="d-flex flex-md-row flex-column justify-content-between">
             <div className="custom-control custom-checkbox">
                 <div>
                     <input onChange={handleSickChange} id={`sick-checkbox-` + id} checked={sick} className="custom-control-input" type="checkbox" />
@@ -85,8 +100,7 @@ const ChildUpdateForm = ({ id, isSick, isContagious }) => {
             </div>
 
             <div>
-                {generateIcons()}
-                <MDBBtn onClick={handleSubmitNewChildState} className="text-light">Mettre à jour</MDBBtn>
+                {generateDynamicButton()}
             </div>
         </div>
     );
